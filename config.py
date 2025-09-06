@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-TOKEN = os.getenv("DISCORD_TOKEN")
+TOKEN = os.getenv("TOKEN")
 PREFIX = os.getenv("PREFIX")
 CHANNEL_ID = int(os.getenv("CHANNEL_ID"))
 CHAT_API_KEY = os.getenv("CHAT_API_KEY")

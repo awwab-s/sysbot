@@ -3,6 +3,7 @@ from discord.ext import commands
 import config
 import asyncio
 import time
+from server import keep_alive
 
 intents = discord.Intents.default()
 intents.message_content = True  # Required for reading messages
@@ -56,5 +57,5 @@ async def main():
             await bot.close()
 
 if __name__ == "__main__":
-    import asyncio
+    keep_alive()
     asyncio.run(main())
