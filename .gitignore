@@ -3,6 +3,8 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+.pythonlibs/
+.upm/
 
 # Virtual environments
 .env
@@ -17,6 +19,8 @@ env/
 # Logs & misc
 *.log
 *.sqlite3
+
+# Replit
 
 # OS files
 .DS_Store
