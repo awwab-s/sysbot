@@ -27,15 +27,6 @@ async def on_ready():
 async def on_command(ctx):
     print(f"[DEBUG] Command '{ctx.command}' triggered by {ctx.author} in {ctx.channel}")
     print("> ", end="", flush=True)
-
-@bot.event
-async def on_disconnect():
-    channel = bot.get_channel(config.CHANNEL_ID)
-    if channel:
-        uptime = time.time() - bot.start_time if bot.start_time else 0
-        uptime_str = time.strftime("%H:%M:%S", time.gmtime(uptime))
-        await channel.send(f"🛑 Bot offline. Uptime: `{uptime_str}`")
-        print(f"🛑 Bot offline. Uptime: `{uptime_str}`")
         
 async def console_input():
     await bot.wait_until_ready()
@@ -49,11 +40,7 @@ async def main():
     async with bot:
         for ext in extensions:
             await bot.load_extension(ext)
-        try:
-            await bot.start(config.TOKEN)
-        except KeyboardInterrupt:
-            print(f"Keyboard Interrupt. Bot offline.")
-            await bot.close()
+        await bot.start(config.TOKEN)
 
 if __name__ == "__main__":
     from server import keep_alive
