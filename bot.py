@@ -12,6 +12,7 @@ bot = commands.Bot(command_prefix=config.PREFIX, intents=intents, help_command=N
 extensions = [
     "cogs.general",
     "cogs.ai",
+    "cogs.study",
 ]
 
 # Track bot start time
