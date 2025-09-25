@@ -6,11 +6,11 @@ class General(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.hybrid_command(name="hello", description="Greet the bot")
     async def hello(self, ctx):
         await ctx.send(f"Hello {ctx.author.name}! 👋")
     
-    @commands.command()
+    @commands.hybrid_command(name="ping", description="Check the bot's latency")
     async def ping(self, ctx):
         await ctx.send(f"Pong! 🏓 Latency: {round(self.bot.latency * 1000)}ms")
         
@@ -22,13 +22,13 @@ class General(commands.Cog):
     async def spam(self, ctx):
         await ctx.send("<:arab_flushed:1335270974089724016>" * 7)
     
-    @commands.command()
+    @commands.hybrid_command(name="uptime", description="Check bot uptime")
     async def uptime(self, ctx):
         uptime = time.time() - self.bot.start_time
         uptime_str = time.strftime("%H:%M:%S", time.gmtime(uptime))
         await ctx.send(f"⏱️ Uptime: `{uptime_str}`")
 
-    @commands.command()
+    @commands.hybrid_command(name="help", description="Show help message")
     async def help(self, ctx):
         help_text = """
         **Available Commands:**
@@ -38,10 +38,13 @@ class General(commands.Cog):
         `!userinfo [@user]` - Get info about a user
         `!serverinfo` - Get info about the server
         `!ask <question>` - Ask a question
+        `!study <minutes>` - Start a study session  
+        `!status` - Check remaining time in your study session  
+        `!cancelstudy` - Cancel your active study session
         """
         await ctx.send(help_text)
     
-    @commands.command()
+    @commands.hybrid_command(name="userinfo", description="Get info about a user")
     async def userinfo(self, ctx, member: commands.MemberConverter = None):
         member = member or ctx.author
         embed = discord.Embed(
@@ -57,7 +60,7 @@ class General(commands.Cog):
         await ctx.send(embed=embed)
 
 
-    @commands.command()
+    @commands.hybrid_command(name="serverinfo", description="Get info about the server")
     async def serverinfo(self, ctx):
         guild = ctx.guild
         embed = discord.Embed(

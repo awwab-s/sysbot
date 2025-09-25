@@ -20,6 +20,7 @@ bot.start_time = None
 
 @bot.event
 async def on_ready():
+    await bot.tree.sync()
     bot.start_time = time.time()
     print(f"Logged in as {bot.user}")
     bot.loop.create_task(console_input())

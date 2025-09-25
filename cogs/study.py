@@ -10,7 +10,7 @@ class Study(commands.Cog):
         # format: {user_id: {"end_time": <timestamp>, "task": <asyncio.Task>}}
         self.active_sessions = {}
 
-    @commands.command()
+    @commands.hybrid_command(name="study", description="Start a study session")
     async def study(self, ctx, minutes: int):
         """Start a study session for <minutes> minutes."""
         user_id = ctx.author.id
@@ -34,7 +34,7 @@ class Study(commands.Cog):
             await ctx.send(f"🔔 {ctx.author.mention} Time’s up! You studied for {minutes} minutes. Take a break ☕")
             self.active_sessions.pop(user_id, None)
 
-    @commands.command()
+    @commands.hybrid_command(name="cancelstudy", description="Cancel your current study session")
     async def cancelstudy(self, ctx):
         """Cancel your current study session."""
         user_id = ctx.author.id
@@ -48,7 +48,7 @@ class Study(commands.Cog):
         self.active_sessions.pop(user_id, None)
         await ctx.send(f"🛑 {ctx.author.mention} Your study session has been cancelled.")
 
-    @commands.command()
+    @commands.hybrid_command(name="status", description="Check remaining time in your study session")
     async def status(self, ctx):
         """Check how much time is left in your session."""
         user_id = ctx.author.id
