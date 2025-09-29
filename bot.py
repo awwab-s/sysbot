@@ -13,6 +13,7 @@ extensions = [
     "cogs.general",
     "cogs.ai",
     "cogs.study",
+    "cogs.quran"
 ]
 
 # Track bot start time
@@ -20,8 +21,8 @@ bot.start_time = None
 
 @bot.event
 async def on_ready():
-    await bot.tree.sync()
     bot.start_time = time.time()
+    await bot.tree.sync()
     print(f"Logged in as {bot.user}")
     bot.loop.create_task(console_input())
 
@@ -40,8 +41,16 @@ async def console_input():
 
 async def main():
     async with bot:
+        # Load all cogs
         for ext in extensions:
-            await bot.load_extension(ext)
+            try:
+                await bot.load_extension(ext)
+                print(f"[DEBUG] Loaded {ext}")
+            except Exception as e:
+                print(f"[ERROR] Failed to load {ext}: {e}")
+
+        
+        # Start the bot
         await bot.start(config.TOKEN)
 
 if __name__ == "__main__":
