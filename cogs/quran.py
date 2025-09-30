@@ -96,7 +96,7 @@ class Quran(commands.Cog):
         # Get surah
         chapters = await self.get_chapters()
         surah_info = chapters.get(surah, {})
-        surah_name_en = surah_info.get("name_simple", f"Surah {surah}")
+        surah_name_en = surah_info.get("name_simple", f"{surah}")
         surah_name_ar = surah_info.get("name_arabic", "")
         surah_revelation = surah_info.get("revelation_place", "")
         
