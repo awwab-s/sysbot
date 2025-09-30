@@ -98,6 +98,7 @@ class Quran(commands.Cog):
         surah_info = chapters.get(surah, {})
         surah_name_en = surah_info.get("name_simple", f"Surah {surah}")
         surah_name_ar = surah_info.get("name_arabic", "")
+        surah_revelation = surah_info.get("revelation_place", "")
         
         # Get verse
         data = await self.api_request(f"/verses/by_chapter/{surah}", params={"fields": "text_uthmani"})
@@ -119,7 +120,7 @@ class Quran(commands.Cog):
             color=discord.Color.gold()
         )
         embed.set_footer(
-            text=f"Revealed in {surah_info.get('revelation_place', '').title()}"
+            text=f"Revealed in {surah_revelation.capitalize()}"
         )
         await ctx.send(embed=embed)
 
